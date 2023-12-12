@@ -14,7 +14,7 @@ class User(models.Model):
         ('Rari', 'Rari'),
         ('Capilla Palacio', 'Capilla Palacio'),
     ]
-    sector = models.CharField(max_length=10, choices=sector_choices)
+    sector = models.CharField(max_length=15, choices=sector_choices)
     estado_choices = [
         ('Activo', 'Activo'),
         ('Inactivo', 'Inactivo'),
@@ -25,13 +25,14 @@ class User(models.Model):
         ('Funcionario', 'Funcionario'),
     ]
     tipo_usuario = models.CharField(max_length=20, choices=tipo_usuario_choices)
+
     def __str__(self):
-        return f"{self.nombre} {self.apellido}"
+        return self.username
 
 class Lectura(models.Model):
     codigo_lectura = models.CharField(max_length=20, unique=True)
-    usuario_realiza_lectura = models.ForeignKey(User, on_delete=models.CASCADE)
-    usuario_toma_lectura = models.ForeignKey(User, on_delete=models.CASCADE)
+    usuario_realiza_lectura = models.ForeignKey(User, on_delete=models.CASCADE, related_name='lecturas_realizadas')
+    usuario_toma_lectura = models.ForeignKey(User, on_delete=models.CASCADE, related_name='lecturas_tomadas')
     lectura = models.FloatField()
 
     def __str__(self):
@@ -39,8 +40,8 @@ class Lectura(models.Model):
 
 class Pago(models.Model):
     codigo_pago = models.CharField(max_length=20, unique=True)
-    usuario_registra_pago = models.ForeignKey(User, on_delete=models.CASCADE)
-    usuario_recibe_pago = models.ForeignKey(User, on_delete=models.CASCADE)
+    usuario_registra_pago = models.ForeignKey(User, on_delete=models.CASCADE, related_name='pagos_registrados')
+    usuario_recibe_pago = models.ForeignKey(User, on_delete=models.CASCADE, related_name='pagos_recibidos')
     pago = models.FloatField()
 
     def __str__(self):

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Filtrar Clientes por Sector</h2>
+  <form method="post">
+    {% csrf_token %}
+    <label for="sector">Seleccione un sector:</label>
+    <select id="sector" name="sector">
+      <option value="Colbun">Colbun</option>
+      <option value="Panimávida">Panimávida</option>
+      <option value="Maule sur">Maule sur</option>
+      <option value="La Guardia">La Guardia</option>
+      <option value="San Nicolas">San Nicolas</option>
+      <option value="Quinamavida">Quinamavida</option>
+      <option value="Rari">Rari</option>
+      <option value="Capilla Palacio">Capilla Palacio</option>
+    </select>
+    <button type="submit">Filtrar</button>
+  </form>
+{% endblock %}

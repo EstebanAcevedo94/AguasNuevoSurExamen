@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Mi Aplicación{% endblock %}</title>
+    <!-- Agrega tus enlaces a archivos CSS aquí si es necesario -->
+</head>
+<body>
+    <div id="wrapper">
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>Aguas Nuevo Sur</h3>
+            </div>
+
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="#gestionUsuarios" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Gestión de Usuarios</a>
+                    <ul class="collapse list-unstyled" id="gestionUsuarios">
+                        <li>
+                            <a href="{% url 'agregar_cliente' %}">Añadir Cliente</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'modificar_cliente' %}">Modificar Cliente</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'clientes_activos' %}">Ver Clientes Activos</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'clientes_inactivos' %}">Ver Clientes Inactivos</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'filtrar_por_sector' %}">Filtrar por Sector</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#gestionLecturas" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Gestión de Lecturas</a>
+                    <ul class="collapse list-unstyled" id="gestionLecturas">
+                        <li>
+                            <a href="{% url 'registrar_lectura' %}">Registrar Lectura</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#gestionPagos" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Gestión de Pagos</a>
+                    <ul class="collapse list-unstyled" id="gestionPagos">
+                        <li>
+                            <a href="{% url 'registrar_pago' %}">Registrar Pago</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <div id="content">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+
+    <!-- Agrega tus enlaces a archivos JS y jQuery aquí si es necesario -->
+
+</body>
+</html>
