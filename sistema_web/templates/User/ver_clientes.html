@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %} Ver Clientes {% endblock %}
+
+{% block content %}
+<div class="col-12">
+    <div class="bg-secondary rounded h-100 p-4">
+        <h6 class="mb-4"></h6>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <th>Rut</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Sector</th>
+                </thead>
+                <tbody>
+                    <h1>Lista de Clientes</h1>
+                    <form method="get">
+                        <input type="text" name="search" placeholder="Buscar Cliente por rut">
+                        <button type="submit">Buscar</button>
+                    </form>
+                    {% for cliente in clientes %}
+                    <tr>
+                        <td>{{ cliente.rut }}</td>
+                        <td>{{ cliente.nombre }}</td>
+                        <td>{{ cliente.apellido }}</td>
+                        <td>{{ cliente.sector }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

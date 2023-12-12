@@ -1,15 +1,17 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
+
+from .UserForm import UserForm
 from .models import User
 
 
 def agregar_cliente(request):
     if request.method == 'POST':
-        form = ClienteForm(request.POST)
+        form = UserForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('clientes_activos')
     else:
-        form = ClienteForm()
+        form = UserForm()
 
     return render(request, 'agregar_cliente.html', {'form': form})
 
@@ -18,15 +20,22 @@ def modificar_cliente(request, rut):
     cliente = get_object_or_404(User, rut=rut)
 
     if request.method == 'POST':
-        form = ClienteForm(request.POST, instance=cliente)
+        form = UserForm(request.POST, instance=cliente)
         if form.is_valid():
             form.save()
             return redirect('clientes_activos')
     else:
-        form = ClienteForm(instance=cliente)
+        form = UserForm(instance=cliente)
 
     return render(request, 'modificar_cliente.html', {'form': form})
 
+
+def ver_clientes(request):
+    clientes = User.objects.all()
+    if request.method == 'GET' and 'search' in request.GET:
+        query = request.GET['search']
+        clientes = User.objects.filter(rut__iconstrains=query)
+    return render(request, 'ver_clientes.html',{'clientes': clientes})
 
 def ver_clientes_activos(request):
     clientes_activos = User.objects.filter(estado='Activo')
@@ -46,3 +55,27 @@ def filtrar_por_sector(request):
                       {'clientes': clientes_filtrados, 'titulo': f'Clientes del sector {sector}'})
     else:
         return render(request, 'filtrar_por_sector.html')
+
+def registrar_lectura(request):
+    # Lógica para manejar el registro de lecturas, por ejemplo, guardar en la base de datos
+    if request.method == 'POST':
+        # Lógica para manejar la información del formulario si se envía por POST
+        pass
+    else:
+        # Lógica para manejar el caso GET, mostrar el formulario por ejemplo
+        pass
+
+    # Renderiza la plantilla correspondiente
+    return render(request, 'tu_template_de_registrar_lectura.html', {})
+
+def registrar_pago(request):
+    # Lógica para manejar el registro de pagos, por ejemplo, guardar en la base de datos
+    if request.method == 'POST':
+        # Lógica para manejar la información del formulario si se envía por POST
+        pass
+    else:
+        # Lógica para manejar el caso GET, mostrar el formulario por ejemplo
+        pass
+
+    # Renderiza la plantilla correspondiente
+    return render(request, 'tu_template_de_registrar_pago.html', {})

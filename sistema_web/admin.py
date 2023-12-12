@@ -1,4 +1,5 @@
 from django.contrib import admin
+from .models import User,Lectura,Pago
 
 
 class User_Admin(admin.ModelAdmin):
@@ -17,3 +18,7 @@ class Pago_Admin(admin.ModelAdmin):
     list_display = ('codigo_pago', 'usuario_registra_pago', 'usuario_recibe_pago', 'pago')
     search_fields = ['codigo_pago', 'usuario_registra_pago']
     list_filter = ('codigo_pago', 'usuario_registra_pago', 'usuario_recibe_pago', 'pago')
+
+admin.site.register(User, User_Admin)
+admin.site.register(Lectura, Lectura_Admin)
+admin.site.register(Pago, Pago_Admin)

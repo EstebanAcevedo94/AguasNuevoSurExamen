@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class User(models.Model):
     rut = models.CharField(max_length=12, unique=True)
     nombre = models.CharField(max_length=50)
@@ -27,7 +28,8 @@ class User(models.Model):
     tipo_usuario = models.CharField(max_length=20, choices=tipo_usuario_choices)
 
     def __str__(self):
-        return self.username
+        return self.nombre
+
 
 class Lectura(models.Model):
     codigo_lectura = models.CharField(max_length=20, unique=True)
@@ -37,6 +39,7 @@ class Lectura(models.Model):
 
     def __str__(self):
         return f"{self.codigo_lectura} - {self.lectura}"
+
 
 class Pago(models.Model):
     codigo_pago = models.CharField(max_length=20, unique=True)
