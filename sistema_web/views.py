@@ -1,7 +1,15 @@
 from django.shortcuts import render, redirect, get_object_or_404
 
 from .UserForm import UserForm
-from .models import User
+from .models import *
+
+
+def ver_clientes(request):
+    clientes = User.objects.all()
+    if request.method == 'GET' and 'search' in request.GET:
+        query = request.GET['search']
+        clientes = User.objects.filter(nombre__icontains=query)
+    return render(request, 'ver_clientes.html', {'clientes': clientes})
 
 
 def agregar_cliente(request):
@@ -30,13 +38,6 @@ def modificar_cliente(request, rut):
     return render(request, 'modificar_cliente.html', {'form': form})
 
 
-def ver_clientes(request):
-    clientes = User.objects.all()
-    if request.method == 'GET' and 'search' in request.GET:
-        query = request.GET['search']
-        clientes = User.objects.filter(rut__iconstrains=query)
-    return render(request, 'ver_clientes.html',{'clientes': clientes})
-
 def ver_clientes_activos(request):
     clientes_activos = User.objects.filter(estado='Activo')
     return render(request, 'ver_clientes.html', {'clientes': clientes_activos, 'titulo': 'Clientes Activos'})
@@ -56,6 +57,13 @@ def filtrar_por_sector(request):
     else:
         return render(request, 'filtrar_por_sector.html')
 
+def ver_lecturas(request):
+    lecturas = Lectura.objects.all()
+    if request.method == 'GET' and 'search' in request.GET:
+        query = request.GET['search']
+        lecturas = Lectura.objects.filter(codigo_lectura__icontains=query)
+    return render(request, 'ver_lecturas.html', {'lecturas': lecturas})
+
 def registrar_lectura(request):
     # Lógica para manejar el registro de lecturas, por ejemplo, guardar en la base de datos
     if request.method == 'POST':
@@ -64,9 +72,14 @@ def registrar_lectura(request):
     else:
         # Lógica para manejar el caso GET, mostrar el formulario por ejemplo
         pass
+    return render(request, 'registrar_lectura.html', {})
 
-    # Renderiza la plantilla correspondiente
-    return render(request, 'tu_template_de_registrar_lectura.html', {})
+def ver_pagos(request):
+    pagos = Pago.objects.all()
+    if request.method == 'GET' and 'search' in request.GET:
+        query = request.GET['search']
+        pagos = Pago.objects.filter(codigo_pago__icontains=query)
+    return render(request, 'ver_pagos.html', {'pagos': pagos})
 
 def registrar_pago(request):
     # Lógica para manejar el registro de pagos, por ejemplo, guardar en la base de datos
@@ -76,6 +89,4 @@ def registrar_pago(request):
     else:
         # Lógica para manejar el caso GET, mostrar el formulario por ejemplo
         pass
-
-    # Renderiza la plantilla correspondiente
-    return render(request, 'tu_template_de_registrar_pago.html', {})
+    return render(request, 'registrar_pago.html', {})

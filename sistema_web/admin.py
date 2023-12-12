@@ -1,5 +1,10 @@
 from django.contrib import admin
-from .models import User,Lectura,Pago
+from .models import *
+from scripts.crear_data import generar_lectura,generar_pago,generar_usuario
+
+generar_pago()
+generar_usuario()
+generar_lectura()
 
 
 class User_Admin(admin.ModelAdmin):

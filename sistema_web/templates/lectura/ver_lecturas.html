@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %} Ver Clientes {% endblock %}
+{% block title %} Ver Lecturas {% endblock %}
 
 {% block content %}
 <div class="col-12">
@@ -7,7 +7,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
             <div class="container-fluid">
                 <!-- Navbar Brand -->
-                <a class="navbar-brand" href="#">Gestión de Clientes</a>
+                <a class="navbar-brand" href="#">Gestión de Lecturas</a>
 
                 <!-- Navbar Toggler Button -->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,12 +45,12 @@
                     <th>Sector</th>
                 </thead>
                 <tbody>
-                    <h1>Lista de Clientes</h1>
+                    <h1>Lista de Lecturas</h1>
                     <form method="get">
-                        <input type="text" name="search" placeholder="Buscar por nombre">
+                        <input type="text" name="search" placeholder="Buscar por codigo">
                         <button type="submit">Buscar</button>
                     </form>
-                    {% for cliente in clientes %}
+                    {% for lectura in lecturas %}
                     <tr>
                         <td>{{ cliente.rut }}</td>
                         <td>{{ cliente.nombre }}</td>
